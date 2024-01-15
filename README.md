@@ -1,5 +1,7 @@
 # predirep-paper
 
+Overview:
+
 PrediRep is a deep learning network inspired by predictive coding, a neuroscientific theory of information processing in the brain. This repository hosts the implementation and details of the PrediRep model. PrediRep is an improved model over other similar predictive    coding inspired deep learning models such as PredNet and PreCNet. It achieves closer functional and structural alignment with predictive coding while maintaining comparable computational performance.
 
 Features:
@@ -25,6 +27,7 @@ PreCNet - https://arxiv.org/abs/2004.14878
 RBP - https://arxiv.org/abs/2005.03230
 
 Contact:
+
 ibrahimhashim.coding@gmail.com
 
 
