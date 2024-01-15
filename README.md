@@ -3,9 +3,9 @@ PrediRep is a deep learning network inspired by predictive coding, a neuroscient
 
 Features:
 
-    Detailed documentation on the architecture, training process, and integration.
-    Comparative analysis showcasing the advancements over similar networks such as PredNet, PreCNet and RBP.
-    User-friendly implementation with clear instructions for seamless utilization.
+Detailed documentation on the architecture, training process, and integration.
+Comparative analysis showcasing the advancements over similar networks such as PredNet, PreCNet and RBP.
+User-friendly implementation with clear instructions for seamless utilization.
 
 Usage:
 [Provide concise instructions on how to use your code, including dependencies and setup.]
