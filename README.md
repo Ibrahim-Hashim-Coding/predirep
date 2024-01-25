@@ -23,7 +23,9 @@ If you find PrediRep useful for your work, please consider citing our paper [inc
 ## References
 
 Prednet - https://coxlab.github.io/prednet/
+
 PreCNet - https://arxiv.org/abs/2004.14878
+
 RBP - https://arxiv.org/abs/2005.03230
 
 ## Contact
