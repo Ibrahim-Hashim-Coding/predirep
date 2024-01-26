@@ -14,11 +14,10 @@ from networks.predirep import PrediRep  # change this if you want to use other n
 
 # Set parameters
 nt = 10  # number of time steps to calculate MSE over
-N_seq = 83
 
 # Load test files and create generator and dataset
-test_file = os.path.join(DATA_DIR, 'X_test.hkl')
-test_sources = os.path.join(DATA_DIR, 'sources_test.hkl')
+test_file = os.path.join(DATA_DIR, 'X_example.hkl')
+test_sources = os.path.join(DATA_DIR, 'sources_example.hkl')
 test_generator = SequenceGenerator(test_file, test_sources, nt, sequence_start_mode='unique',
                                    data_format="channels_last")
 X_test = test_generator.create_all()
