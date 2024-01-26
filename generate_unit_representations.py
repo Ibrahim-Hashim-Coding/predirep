@@ -17,8 +17,8 @@ nt = 10  # for how many time steps to extract unit information
 layers = [0, 1, 2, 3]  # for which layers to extract unit information
 
 # Load test data and create generator
-test_file = os.path.join(DATA_DIR, 'X_test.hkl')
-test_sources = os.path.join(DATA_DIR, 'sources_test.hkl')
+test_file = os.path.join(DATA_DIR, 'X_example.hkl')
+test_sources = os.path.join(DATA_DIR, 'sources_example.hkl')
 test_generator = SequenceGenerator(test_file, test_sources, nt, sequence_start_mode='unique',
                                    data_format="channels_last", N_seq=1)
 X_test = test_generator.create_all()
