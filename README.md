@@ -8,8 +8,9 @@ PrediRep is a deep learning network inspired by predictive coding, a neuroscient
 
 Detailed documentation on the PrediRep architecture, training process, and analyses. Also includes implementations of PredNet, PreCNet and RBP. 
 
-## Usage
-[Provide concise instructions on how to use your code, including dependencies and setup.]
+## Setup
+
+To quickly get started with PrediRep you first need to create a conda environment. The conva environment should be created from the environment.yml file, which allows for a quick way to set up the environment to run PrediRep. Help on how to do this can be found under https://conda.io/docs/user-guide/tasks/manage-environments.html. Once you have created the environment, you first need to go to the following directory: WHERE_YOUR_ANACONDA_IS_STORED/anaconda3/envs/predirep/lib/python3.6/site-packages/keras/engine. You then need to copy the savings.py file found in the setup directory of this repository to the mentioned directory and overwrite the file currently found there. After this, you can run the scripts with the pre-trained PrediRep model.
 
 ## Documentation
 [Link to or include documentation that explains the architecture, training process, and any other relevant details.]
