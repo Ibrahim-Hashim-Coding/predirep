@@ -1,7 +1,3 @@
-# This file allows you to configure your python environment quickly for predirep.
-# Please refer to the conda documentation for more info:
-# https://conda.io/docs/user-guide/tasks/manage-environments.html
-
 name: predirep
 
 dependencies:
