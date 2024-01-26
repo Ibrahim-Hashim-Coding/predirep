@@ -1,0 +1,16 @@
+# This file allows you to configure your python environment quickly for predirep.
+# Please refer to the conda documentation for more info:
+# https://conda.io/docs/user-guide/tasks/manage-environments.html
+
+name: predirep
+
+dependencies:
+  - python=3.6
+
+  - pip:
+    - keras==2.2.4
+    - theano==0.9.0
+    - tensorflow==1.6
+    - hickle==5.0.2
+    - matplotlib
+    - dill
