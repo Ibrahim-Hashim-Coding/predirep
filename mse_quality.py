@@ -14,6 +14,7 @@ from networks.predirep import PrediRep  # change this if you want to use other n
 
 # Set parameters
 nt = 10  # number of time steps to calculate MSE over
+learn_type = "equal"  # the learn type of the model, either zero, all or equal
 
 # Load test files and create generator and dataset
 test_file = os.path.join(DATA_DIR, 'X_example.hkl')
@@ -26,8 +27,9 @@ X_test = test_generator.create_all()
 last_frame_mean = np.mean((X_test[:, :-1] - X_test[:, 1:])**2)
 
 # Load weights and model
-weights_file = WEIGHTS_DIR + 'predirep_weights.hdf5'
-json_file = WEIGHTS_DIR + 'predirep_model.json'
+weights_file = WEIGHTS_DIR + 'predirep_{}_weights.hdf5'.format(learn_type)
+json_file = WEIGHTS_DIR + 'predirep_{}_model.json'.format(learn_type)
+
 f = open(json_file, 'r')
 json_string = f.read()
 f.close()

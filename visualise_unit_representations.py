@@ -11,7 +11,7 @@ from data_settings import *
 units = ['R', 'Ahat', 'A', 'E']  # which units to visualise
 nt = 10  # which time step to visualise units from
 layers = [0, 1, 2, 3]  # which layers to visualise units from
-
+learn_type = "zero"
 units_and_layers = ["{}{}".format(unit, layer) for unit in units for layer in layers]
 
 # Create figures
@@ -25,7 +25,7 @@ for a in ax:
     a.set_yticks([])
 
 for unl_c, unl in enumerate(units_and_layers):
-    unit_rep = np.load(WEIGHTS_DIR + 'unit_rep/{}.npy'.format(unl))
+    unit_rep = np.load(WEIGHTS_DIR + 'unit_rep/{}_{}.npy'.format(learn_type, unl))
     unit_rep = unit_rep[0, nt-1]  # only extracted wanted time step
 
     # In this situation, it would be good to visualise Ahat0 and A0 in colour, as they have 3 colour channels,
@@ -48,5 +48,5 @@ ax[len(layers)*3+1].set_xlabel('Layer 1')
 ax[len(layers)*3+2].set_xlabel('Layer 2')
 ax[len(layers)*3+3].set_xlabel('Layer 3')
 
-plt.savefig(WEIGHTS_DIR + 'unit_representations.png', bbox_inches='tight')
+plt.savefig(WEIGHTS_DIR + 'unit_representations_{}.png'.format(learn_type), bbox_inches='tight')
 plt.close()

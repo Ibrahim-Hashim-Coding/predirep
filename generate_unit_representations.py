@@ -15,10 +15,11 @@ from networks.predirep import PrediRep
 
 nt = 10  # for how many time steps to extract unit information
 layers = [0, 1, 2, 3]  # for which layers to extract unit information
+learn_type = "equal"
 
 # Load test data and create generator
-test_file = os.path.join(DATA_DIR, 'X_example.hkl')
-test_sources = os.path.join(DATA_DIR, 'sources_example.hkl')
+test_file = os.path.join(DATA_DIR, 'X_test.hkl')
+test_sources = os.path.join(DATA_DIR, 'sources_test.hkl')
 test_generator = SequenceGenerator(test_file, test_sources, nt, sequence_start_mode='unique',
                                    data_format="channels_last", N_seq=1)
 X_test = test_generator.create_all()
@@ -28,8 +29,9 @@ if not os.path.exists(WEIGHTS_DIR + 'unit_rep'):
     os.mkdir(WEIGHTS_DIR + 'unit_rep')
 
 # Load weights and model
-weights_file = WEIGHTS_DIR + 'predirep_weights.hdf5'
-json_file = WEIGHTS_DIR + 'predirep_model.json'
+weights_file = WEIGHTS_DIR + 'predirep_{}_weights.hdf5'.format(learn_type)
+json_file = WEIGHTS_DIR + 'predirep_{}_model.json'.format(learn_type)
+
 f = open(json_file, 'r')
 json_string = f.read()
 f.close()
@@ -51,4 +53,4 @@ for layer_c, layer in enumerate(layers):
         predictions = test_predirep(inputs)
         test_model = Model(inputs=inputs, outputs=predictions)
         X_hat = test_model.predict(X_test)
-        np.save(WEIGHTS_DIR + '/unit_rep/{}.npy'.format(unit), X_hat)
+        np.save(WEIGHTS_DIR + '/unit_rep/{}_{}.npy'.format(learn_type, unit), X_hat)
