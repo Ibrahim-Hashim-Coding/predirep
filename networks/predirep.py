@@ -156,10 +156,10 @@ class PrediRep(Recurrent):
 
     def build(self, input_shape):
         self.input_spec = [InputSpec(shape=input_shape)]
-        self.conv_layers = {c: [] for c in ['h1', 'h2', 'ahat']}
+        self.conv_layers = {c: [] for c in ['rec_dw', 'rec_up', 'ahat', 'fb']}
 
         for l in range(self.nb_layers):
-            for c in ['h1', 'h2']:
+            for c in ['rec_dw', 'rec_up']:
                 act = self.recurrent_activation
                 self.conv_layers[c].append(Conv2D(self.R_stack_sizes[l], self.R_filt_sizes[l], padding='same',
                                                   activation=act, data_format=self.data_format))
@@ -167,6 +167,11 @@ class PrediRep(Recurrent):
             act = 'relu' if l == 0 else self.recurrent_activation
             self.conv_layers['ahat'].append(Conv2D(self.stack_sizes[l], self.Ahat_filt_sizes[l], padding='same',
                                                    activation=act, data_format=self.data_format))
+
+            if l != self.nb_layers - 1:
+                self.conv_layers['fb'].append(
+                    Conv2D(self.R_stack_sizes[l + 1], self.Ahat_filt_sizes[l], padding='same', activation=act,
+                           data_format=self.data_format))
 
         self.upsample = UpSampling2D(data_format=self.data_format)
         self.pool = MaxPooling2D(data_format=self.data_format)
@@ -179,12 +184,14 @@ class PrediRep(Recurrent):
 
                 if c == 'ahat':
                     nb_channels = self.R_stack_sizes[l]
-                elif c == 'h1':
+                elif c == 'rec_dw':
                     nb_channels = self.R_stack_sizes[l]
                     if l < self.nb_layers - 1:
                         nb_channels += self.R_stack_sizes[l+1]
-                elif c == 'h2':
+                elif c == 'rec_up':
                     nb_channels = self.R_stack_sizes[l] + self.stack_sizes[l] * 2
+                elif c == 'fb':
+                    nb_channels = self.R_stack_sizes[l + 1]
 
                 in_shape = (input_shape[0], nb_channels, nb_row // ds_factor, nb_col // ds_factor)
                 if self.data_format == 'channels_last': in_shape = (in_shape[0], in_shape[2], in_shape[3], in_shape[1])
@@ -209,11 +216,11 @@ class PrediRep(Recurrent):
             # Update R layers
             inputs = [r_tm1[l]]
             if l < self.nb_layers - 1:
-                _r_upsample = self.upsample.call(r_dw[0])
+                _r_upsample = self.conv_layers['fb'][l].call(self.upsample.call(r_dw[0]))
                 inputs.append(_r_upsample)
             inputs = K.concatenate(inputs, axis=self.channel_axis)
 
-            _r = self.conv_layers['h1'][l].call(inputs)
+            _r = self.conv_layers['rec_dw'][l].call(inputs)
             r_dw.insert(0, _r)
 
             # Creating predictions
@@ -235,7 +242,7 @@ class PrediRep(Recurrent):
             # Update R layers
             inputs = [r_dw[l], e[l]]
             inputs = K.concatenate(inputs, axis=self.channel_axis)
-            _r = self.conv_layers['h2'][l].call(inputs)
+            _r = self.conv_layers['rec_up'][l].call(inputs)
             r_up.append(_r)
 
             if self.output_layer_num == l:
