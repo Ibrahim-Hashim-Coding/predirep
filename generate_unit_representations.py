@@ -3,14 +3,17 @@ Generate layer specific unit representations for PrediRep on dataset.
 '''
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import os
+import glob
+
 import numpy as np
+from keras import backend as K
 from keras.models import Model, model_from_json
 from keras.layers import Input
+
 from data_utils import SequenceGenerator
 from data_settings import *
-import glob
-from keras import backend as K
 from networks.predirep import PrediRep
 
 nt = 10  # for how many time steps to extract unit information
@@ -29,7 +32,7 @@ if not os.path.exists(WEIGHTS_DIR + 'unit_rep'):
     os.mkdir(WEIGHTS_DIR + 'unit_rep')
 
 # Load weights and model
-weights_file = WEIGHTS_DIR + 'predirep_{}_weights.hdf5'.format(learn_type)
+weights_file = WEIGHTS_DIR + '/predirep_{}_weights/predirep_{}_weights_0.hdf5'.format(learn_type, learn_type)
 json_file = WEIGHTS_DIR + 'predirep_{}_model.json'.format(learn_type)
 
 f = open(json_file, 'r')
