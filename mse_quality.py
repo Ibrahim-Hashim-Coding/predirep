@@ -1,15 +1,18 @@
 '''
 Calculate MSE for PrediRep.
 '''
+
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-from keras.models import Model, model_from_json
-from keras.layers import Input
-from data_utils import SequenceGenerator
-from data_settings import *
+import os
+
 import numpy as np
 from keras import backend as K
-import os
+from keras.models import Model, model_from_json
+from keras.layers import Input
+
+from data_utils import SequenceGenerator
+from data_settings import *
 from networks.predirep import PrediRep  # change this if you want to use other networks
 
 # Set parameters
@@ -27,7 +30,7 @@ X_test = test_generator.create_all()
 last_frame_mean = np.mean((X_test[:, :-1] - X_test[:, 1:])**2)
 
 # Load weights and model
-weights_file = WEIGHTS_DIR + 'predirep_{}_weights.hdf5'.format(learn_type)
+weights_file = WEIGHTS_DIR + '/predirep_{}_weights/predirep_{}_weights_0.hdf5'.format(learn_type, learn_type)
 json_file = WEIGHTS_DIR + 'predirep_{}_model.json'.format(learn_type)
 
 f = open(json_file, 'r')
