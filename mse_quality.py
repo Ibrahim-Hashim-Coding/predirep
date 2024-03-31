@@ -1,6 +1,6 @@
-'''
+"""
 Calculate MSE for PrediRep.
-'''
+"""
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
