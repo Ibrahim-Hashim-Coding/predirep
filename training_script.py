@@ -1,14 +1,16 @@
-'''
+"""
 Train networks on video sequences.
 Code is built around that of PredNet (Lotter et al., 2016. - https://coxlab.github.io/prednet/)
-'''
+"""
 
 import os
+
 import numpy as np
 from keras import backend as K
 from keras.models import Model
 from keras.layers import Input, Dense, Flatten, TimeDistributed
 from keras.callbacks import LearningRateScheduler, ModelCheckpoint
+
 from data_utils import SequenceGenerator
 from data_settings import *
 from networks.predirep import PrediRep
