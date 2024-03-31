@@ -1,3 +1,7 @@
+"""
+Script which creates the data generator used to create the sequences shown to PrediRep.
+"""
+
 import hickle as hkl
 import numpy as np
 from keras import backend as K
