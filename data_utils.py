@@ -15,7 +15,6 @@ class SequenceGenerator(Iterator):
                  output_mode='error', sequence_start_mode='all', N_seq=None,
                  data_format=K.image_data_format()):
         self.X = hkl.load(data_file)  # X will be like (n_images, nb_cols, nb_rows, nb_channels)
-        print(self.X.shape)
         self.sources = hkl.load(source_file) # source for each image so when creating sequences can assure that consecutive frames are from same video
         self.nt = nt
         self.batch_size = batch_size
@@ -47,7 +46,6 @@ class SequenceGenerator(Iterator):
         if N_seq is not None and len(self.possible_starts) > N_seq:  # select a subset of sequences if want to
             self.possible_starts = self.possible_starts[:N_seq]
         self.N_sequences = len(self.possible_starts)
-        print(self.N_sequences)
         super(SequenceGenerator, self).__init__(len(self.possible_starts), batch_size, shuffle, seed)
 
     def __getitem__(self, null):
