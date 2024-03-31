@@ -1,10 +1,13 @@
 '''
 Visualise layer specific unit representations for PrediRep on dataset.
 '''
+
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import numpy as np
 import matplotlib.pyplot as plt
+
 from data_settings import *
 
 # Load parameters
