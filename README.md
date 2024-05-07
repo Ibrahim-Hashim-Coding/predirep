@@ -13,7 +13,7 @@ PrediRep is composed of hierarchically stacked levels, each of which contains an
 To quickly get started with PrediRep you first need to create a conda environment. The conda environment should be created from the environment.yml file, which allows for a quick way to set up the environment to run PrediRep. Help on how to do this can be found under https://conda.io/docs/user-guide/tasks/manage-environments.html. Once you have created the environment, you first need to go to the following directory: WHERE_YOUR_ANACONDA_IS_STORED/anaconda3/envs/predirep/lib/python3.6/site-packages/keras/engine. You then need to copy the savings.py file found in the setup directory of this repository to the aforementioned directory and overwrite the file currently found there. After this, you can run the scripts with the pre-trained PrediRep model.
 
 ## Citation
-If you find PrediRep useful for your work, please consider citing our paper (will be released soon).
+If you find PrediRep useful for your work, please consider citing our paper (https://www.biorxiv.org/content/10.1101/2024.05.04.592511v1).
 
 ## References
 
